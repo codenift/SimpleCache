@@ -24,8 +24,8 @@ open class SimpleCache: NSObject
 
     fileprivate static let DEFAULT_CACHE_PREFIX = "user.cache."
 
-    open static var DEFAULT_CACHE_SECONDS: Int = 60
-    open static var CACHE_PROTOCOL: SimpleCacheProtocol = UserDefaultsCache.sharedInstance
+    public static var DEFAULT_CACHE_SECONDS: Int = 60
+    public static var CACHE_PROTOCOL: SimpleCacheProtocol = UserDefaultsCache.sharedInstance
 
     open class func get(_ key: String, defaultValue: Any? = nil) -> Any?
     {
@@ -96,7 +96,7 @@ open class SimpleCache: NSObject
         }
 
         let now = Int(Date().timeIntervalSince1970)
-        let partsCacheKey = key.characters.split{$0 == "."}.map(String.init)
+        let partsCacheKey = key.split{$0 == "."}.map(String.init)
         let timestamp = Int(partsCacheKey[2])!
 
         return timestamp < now
